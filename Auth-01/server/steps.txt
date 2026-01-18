@@ -1,0 +1,1 @@
+npm i nodemon express cors cookie-parser mongoose dotenv bcryptjs jsonwebtoken
