@@ -48,7 +48,10 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-black w-full min-h-screen text-white flex items-center justify-center">
+    <div className="bg-black w-full min-h-screen text-white flex flex-col items-center justify-center">
+     <div className="w-full absolute top-0 right-0 left-0 p-4 sm:p-6 sm:px-24 bg-white/0">
+      <img src={assets.logo} onClick={()=>navigate("/")} alt="" className="cursor-pointer"/>
+     </div>
       <div className="w-full sm:w-96 m-10  p-10 sm:p-5 bg-white/20">
         <div className="flex flex-col items-center justify-center gap-3">
           <h1 className="text-xl">

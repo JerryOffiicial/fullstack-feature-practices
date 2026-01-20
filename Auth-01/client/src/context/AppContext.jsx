@@ -21,8 +21,9 @@ export const AppProvider = ({ children }) => {
         setIsLoggedin(true);
         getUserData();
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      toast.error(error.message || "Something went wrong");
+      setIsLoggedin(false)
     }
   };
 
@@ -31,18 +32,29 @@ export const AppProvider = ({ children }) => {
       const { data } = await axios.get("/api/user/data");
       data.success ? setUserData(data.userData) : toast.error(data.message);
     } catch (error) {
-      toast.error(error.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     getAuthState();
-  }, []);
+  },[]);
 
-  const value = { axios, navigate, isLoggedin, setIsLoggedin, userData, setUserData, getUserData, toast };
+  const value = {
+    axios,
+    navigate,
+    isLoggedin,
+    setIsLoggedin,
+    userData,
+    setUserData,
+    getUserData,
+    toast,
+  };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAppContext = () => {
   return useContext(AppContext);
 };
