@@ -102,7 +102,10 @@ const Login = () => {
               />
             </div>
 
+
             <div className="flex flex-col items-center justify-center gap-3 mt-2">
+
+              <p className="text-xs">Forgot the password? <span onClick={()=>navigate("reset-password")} className="underline text-blue-400/80 cursor-pointer">Click here</span></p>
               <button
                 type="submit"
                 className="w-30 font-medium text-sm py-1 bg-blue-400/40 cursor-pointer rounded-full"
