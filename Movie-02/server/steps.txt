@@ -1,0 +1,4 @@
+npm init -y
+npm i express mongoose cors dotenv jsonwebtoken multer
+npm i nodemon --save-dev
+npm install @imagekit/nodejs    -imagekit.io
