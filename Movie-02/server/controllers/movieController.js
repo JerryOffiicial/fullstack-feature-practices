@@ -2,11 +2,6 @@ import imagekit from "../configs/imageKit.js";
 import Movie from "../models/Movie.js";
 
 export const addMovie = async (req, res) => {
-  console.log("req.file:", req.file);
-  console.log("req.body:", req.body);
-  console.log("PUBLIC KEY:", process.env.IMAGEKIT_PUBLIC_KEY);
-  console.log("PRIVATE KEY:", process.env.IMAGEKIT_PRIVATE_KEY);
-  console.log("ENDPOINT:", process.env.IMAGEKIT_URL_ENDPOINT);
   try {
     const { title, year, description, category, isPublished } = JSON.parse(
       req.body.movie,
@@ -48,6 +43,32 @@ export const addMovie = async (req, res) => {
     res.json({ success: true, message: "Movie added successfully" });
   } catch (error) {
     console.error("ADD MOVIE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getAllMovies = async (req, res) => {
+  try {
+    const movies = await Movie.find({ isPublished: true });
+    res.json({ success: true, movies });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getMovieById = async (req, res) => {
+  try {
+    const { movieId } = req.params;
+
+    const movie = await Movie.findById(movieId);
+
+    if (!movie) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Movie not found" });
+    }
+    res.json({ success: true, movie });
+  } catch (error) {
     res.json({ success: false, message: error.message });
   }
 };
