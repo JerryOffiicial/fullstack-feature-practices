@@ -7,7 +7,7 @@ const movieSchema = new mongoose.Schema(
     description: { type: String, required: true },
     category: { type: String, required: true },
     image: { type: String, required: false },
-    isPublished: { type: Boolean, required: true },
+    isPublished: { type: Boolean, default: false },
   },
   { timestamps: true },
 );
