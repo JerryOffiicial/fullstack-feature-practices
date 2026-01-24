@@ -1,5 +1,6 @@
 import imagekit from "../configs/imageKit.js";
 import Movie from "../models/Movie.js";
+import Review from "../models/Review.js";
 
 export const addMovie = async (req, res) => {
   try {
@@ -68,6 +69,70 @@ export const getMovieById = async (req, res) => {
         .json({ success: false, message: "Movie not found" });
     }
     res.json({ success: true, movie });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const deleteMovieById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Movie.findByIdAndDelete(id);
+
+    //Delete Review fn
+    await Review.deleteMany({ blog: id });
+    res.json({ success: true, message: "Blog deleted successfully" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const togglePublish = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const movie = await Movie.findById(id);
+    if (!movie) {
+      return res.json({ success: false, message: "Movie not found" });
+    }
+    movie.isPublished = !movie.isPublished;
+    await movie.save();
+    res.json({ success: true, message: "Movie status Updated" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const addReview = async (req, res) => {
+  try {
+    const { movie, name, content } = req.body;
+    await Review.create({ movie, name, content });
+    res.json({ success: true, message: "Comment added for review" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getMovieReviews = async (req, res) => {
+  try {
+    const { movieId } = req.body;
+    const reviews = await Review.find({
+      movie: movieId,
+      isApproved: true,
+    }).sort({ createdAt: -1 });
+    res.json({ success: true, reviews });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const generateContent = async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    const content = await main(
+      prompt + " Generate a blog content for this topic in simple text format"
+    );
+
+    res.json({ success: true, content });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
