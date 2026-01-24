@@ -5,7 +5,7 @@ import cross_icon from '../../assets/cross_icon.svg'
 
 
 const MovieTableItem = ({ movie, fetchMovies, index }) => {
-  const { title, createdAt } = movie;
+  const { title, createdAt, year } = movie;
   const MovieDate = new Date(createdAt);
 
   const { axios } = useAppContext();
@@ -45,7 +45,7 @@ const MovieTableItem = ({ movie, fetchMovies, index }) => {
   return (
     <tr className="border-y border-gray-300">
       <th className="px-2 py-4">{index}</th>
-      <td className="px-2 py-4">{title}</td>
+      <td className="px-2 py-4">{title}  ({year})</td>
       <td className="px-2 py-4 max-sm:hidden">{MovieDate.toDateString()}</td>
       <td className="px-2 py-4 max-sm:hidden">
         <p
