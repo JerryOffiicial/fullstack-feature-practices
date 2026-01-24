@@ -16,6 +16,6 @@ adminRouter.get("/reviews", auth, getAllReviews);
 adminRouter.get("/movies", auth, getAllMoviesAdmin);
 adminRouter.post("/delete-review", auth, deletReviewById);
 adminRouter.post("/approve-review", auth, approveReviewById);
-adminRouter.post("/dashboard", auth, getDashboard);
+adminRouter.get("/dashboard", auth, getDashboard);
 
 export default adminRouter;
