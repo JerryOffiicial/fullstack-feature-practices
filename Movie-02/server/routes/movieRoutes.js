@@ -21,6 +21,6 @@ movieRouter.post("/delete", auth, deleteMovieById);
 movieRouter.post("/toggle-publish", auth, togglePublish);
 movieRouter.post("/add-review", addReview);
 movieRouter.post("/reviews", getMovieReviews);
-movieRouter.post("/generate", auth, generateContent);
+movieRouter.post("/generate", generateContent);
 
 export default movieRouter;

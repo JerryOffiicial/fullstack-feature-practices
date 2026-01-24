@@ -1,3 +1,4 @@
+import main from "../configs/gemini.js";
 import imagekit from "../configs/imageKit.js";
 import Movie from "../models/Movie.js";
 import Review from "../models/Review.js";
@@ -128,9 +129,7 @@ export const getMovieReviews = async (req, res) => {
 export const generateContent = async (req, res) => {
   try {
     const { prompt } = req.body;
-    const content = await main(
-      prompt + " Generate a blog content for this topic in simple text format"
-    );
+    const content = await main(prompt + " Generate a movie content for this topic in simple text format");
 
     res.json({ success: true, content });
   } catch (error) {
