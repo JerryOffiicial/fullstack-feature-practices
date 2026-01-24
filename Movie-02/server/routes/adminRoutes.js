@@ -11,7 +11,7 @@ import auth from "../middleware/auth.js";
 
 const adminRouter = express.Router();
 
-adminRouter.post("/login",auth, adminLogin);
+adminRouter.post("/login", adminLogin);
 adminRouter.get("/reviews", auth, getAllReviews);
 adminRouter.get("/movies", auth, getAllMoviesAdmin);
 adminRouter.post("/delete-review", auth, deletReviewById);

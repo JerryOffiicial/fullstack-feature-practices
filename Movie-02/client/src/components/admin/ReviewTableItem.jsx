@@ -5,10 +5,11 @@ import tick_icon from "../../assets/tick_icon.svg";
 import bin_icon from "../../assets/bin_icon.svg";
 
 const ReviewTableItem = ({ review, fetchReviews }) => {
-  const { movie, createdAt, _id } = review;
-  const MovieDate = new Date(createdAt);
-
   const { axios } = useAppContext();
+  const { movie, createdAt, _id } = review;
+  if (!movie) return null;
+
+  const MovieDate = new Date(createdAt);
 
   const approveReview = async () => {
     try {
@@ -63,7 +64,7 @@ const ReviewTableItem = ({ review, fetchReviews }) => {
 
       <td className="px-6 py-4">
         <div className="inline-flex items-center gap-4">
-          {!movie.isApproved ? (
+          {!review.isApproved ? (
             <img
               onClick={approveReview}
               src={tick_icon}

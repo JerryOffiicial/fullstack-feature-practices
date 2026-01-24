@@ -81,8 +81,8 @@ export const deleteMovieById = async (req, res) => {
     await Movie.findByIdAndDelete(id);
 
     //Delete Review fn
-    await Review.deleteMany({ blog: id });
-    res.json({ success: true, message: "Blog deleted successfully" });
+    await Review.deleteMany({ movie: id });
+    res.json({ success: true, message: "Movie deleted successfully" });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -106,8 +106,14 @@ export const togglePublish = async (req, res) => {
 export const addReview = async (req, res) => {
   try {
     const { movie, name, content } = req.body;
+    const movieExists = await Movie.findById(movie);
+    
+    if (!movieExists) {
+      return res.json({ success: false, message: "Movie not found" });
+    }
+
     await Review.create({ movie, name, content });
-    res.json({ success: true, message: "Comment added for review" });
+    res.json({ success: true, message: "Review added for review" });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -129,7 +135,9 @@ export const getMovieReviews = async (req, res) => {
 export const generateContent = async (req, res) => {
   try {
     const { prompt } = req.body;
-    const content = await main(prompt + " Generate a movie content for this topic in simple text format");
+    const content = await main(
+      prompt + " Generate a movie content for this topic in simple text format",
+    );
 
     res.json({ success: true, content });
   } catch (error) {

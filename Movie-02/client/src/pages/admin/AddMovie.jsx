@@ -14,7 +14,7 @@ const AddMovie = () => {
   const editorRef = useRef(null);
   const quillRef = useRef(null);
 
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [subTitle, setSubtitle] = useState("");
   const [year, setYear] = useState("");
@@ -69,8 +69,10 @@ const AddMovie = () => {
         setImage(false);
         setTitle("");
         setYear("");
+        setSubtitle("");
         quillRef.current.root.innerHTML = "";
-        setcategory("Startup");
+        setcategory("");
+        setIsPublished(false);
       } else {
         toast.error(data.message);
       }

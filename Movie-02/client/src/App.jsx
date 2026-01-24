@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
-// import { useAppContext } from "./context/AppContext";
+import { useAppContext } from "./context/AppContext";
 import Layout from "./pages/admin/Layout";
 import Login from "./components/admin/Login";
 import AddMovie from "./pages/admin/AddMovie";
@@ -12,8 +12,7 @@ import ListMovie from "./pages/admin/ListMovie";
 import Reviews from "./pages/admin/Reviews";
 import "quill/dist/quill.snow.css";
 const App = () => {
-  // const { token } = useAppContext();
-  const token = true;
+  const { token } = useAppContext();
   return (
     <div>
       <Toaster />
