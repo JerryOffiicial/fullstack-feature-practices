@@ -29,7 +29,7 @@ const Sidebar = () => {
         }
       >
         <img src={add_icon} alt="" className="min-w-4 w-5" />
-        <p className="hidden md:inline-block">Add blogs</p>
+        <p className="hidden md:inline-block">Add movies</p>
       </NavLink>
 
       <NavLink
@@ -41,7 +41,7 @@ const Sidebar = () => {
         }
       >
         <img src={list_icon} alt="" className="min-w-4 w-5" />
-        <p className="hidden md:inline-block">Blog lists</p>
+        <p className="hidden md:inline-block">Movie lists</p>
       </NavLink>
 
       <NavLink
@@ -53,7 +53,7 @@ const Sidebar = () => {
         }
       >
         <img src={comment_icon} alt="" className="min-w-4 w-5" />
-        <p className="hidden md:inline-block">Comments</p>
+        <p className="hidden md:inline-block">Reviews</p>
       </NavLink>
     </div>
   );
